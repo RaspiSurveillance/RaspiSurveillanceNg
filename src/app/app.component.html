@@ -1,0 +1,153 @@
+<div class="toolbar" role="banner">
+  <div class="toolbar-nav">
+    <a class="nav-item nav-link nav-link-emoji" routerLink="/" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      <fa-icon [icon]="faHome" class="fa-lg" *ngIf="!showEmoji"></fa-icon>
+      <span class="randomEmoji" *ngIf="showEmoji">
+        {{ emojiService.getCurrentEmoji() }}
+      </span>
+      <span>&nbsp;</span>
+      <span>{{ appname }}</span>
+    </a>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div *ngIf="!showCurtain && !user">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/about" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
+        <fa-icon [icon]="faAddressCard" class="fa-lg"></fa-icon>
+        <span>&nbsp;</span>
+        <span *ngIf="isMin">{{ i18nService.translate('app.component.about', 'About') }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="!showCurtain && user">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">
+        <fa-icon [icon]="faAddressBook" class="fa-lg"></fa-icon>
+        <span *ngIf="isMin">&nbsp;</span>
+        <span *ngIf="isMin">{{ i18nService.translate('app.component.users', 'Users') }}</span>
+      </a>
+      <div class="space"></div>
+      <a class="nav-item nav-link" routerLink="/servers" routerLinkActive="active">
+        <fa-icon [icon]="faServer" class="fa-lg"></fa-icon>
+        <span *ngIf="isMin">&nbsp;</span>
+        <span *ngIf="isMin">{{ i18nService.translate('app.component.servers', 'Servers') }}</span>
+      </a>
+      <div class="space"></div>
+      <div class="nav-item nav-link" ngbDropdown>
+        <a ngbDropdownToggle>
+          <fa-icon [icon]="faUserCircle" class="fa-lg"></fa-icon>
+          <span *ngIf="isMin">&nbsp;</span>
+          <span *ngIf="isMin">{{ i18nService.translate('app.component.menu', 'Menu') }}</span>
+        </a>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <div ngbDropdownItem>
+            <a class="nav-item nav-link nav-link-dropdown" routerLink="/users/{{user.id}}">
+              <fa-icon [icon]="faUser" class="fa-lg"></fa-icon>
+              <span>&nbsp;</span>
+              <span>{{ user.username }}</span>
+            </a>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div ngbDropdownItem>
+            <a class="nav-item nav-link nav-link-dropdown" routerLink="/about">
+              <fa-icon [icon]="faAddressCard" class="fa-lg"></fa-icon>
+              <span>&nbsp;</span>
+              <span>{{ i18nService.translate('app.component.about', 'About') }}</span>
+            </a>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div ngbDropdownItem>
+            <a class="nav-item nav-link nav-link-dropdown" (click)="signout()">
+              <fa-icon [icon]="faSignOutAlt" class="fa-lg"></fa-icon>
+              <span>&nbsp;</span>
+              <span>{{ i18nService.translate('app.component.sign_out', 'Sign out') }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="showCurtain" class="content-welcome">
+  <div *ngIf="showCurtain" class="spinner-border spinner-border-sm"></div>
+  <div *ngIf="emojiEnabled" (click)="refreshRandomEmoji()" class="randomEmoji">
+    <span>&nbsp;</span>{{ emojiService.getCurrentEmoji() }}
+  </div>
+</div>
+
+<div *ngIf="!showCurtain && !user" class="content-welcome">
+  <div class="content-row">
+    <div class="content-item">
+      <h2>
+        {{ i18nService.translate('app.component.welcome.header', 'Welcome to %appName%!', { 'appName': appname }) }}
+      </h2>
+      <div>
+        {{ i18nService.translate('app.component.welcome.text', '%appName% is a surveillance tool to watch your house.', { 'appName': appname }) }}
+        <br />
+        {{ i18nService.translate('app.component.welcome.text2', 'Start a camerastream or an on-going surveillance that notifies you.') }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showCurtain && user && askDesktopNotificationPermissions" class="setup-desktop-notifications">
+  <div class="content-row">
+    <div class="content-item">
+      <a (click)="setUpDesktopNotifications()">
+        {{ i18nService.translate('app.component.setup.desktopnotifications', 'Click here to set up desktop notifications.') }}
+      </a>
+    </div>
+    <div class="spacer"></div>
+    <div class="content-item">
+      <a (click)="removeDesktopNotificationsAlert()">
+        <fa-icon [icon]="faTimes" class="fa-lg"></fa-icon>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!showCurtain" class="content" role="main">
+  <div class="content-row">
+    <div class="content-item">
+      <alert></alert>
+    </div>
+    <div class="content-item">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="account-not-verified" *ngIf="!showCurtain && loaded && user && !user.statusVerified">
+    {{ i18nService.translate('app.component.account_verification_str', 'Your email address is not verified, yet. Please check your emails and visit:') }}
+    <a routerLink="/users/{{user.id}}/verify"
+      class="error-link">{{ i18nService.translate('app.component.account_verification', 'Account verification') }}</a>.
+  </div>
+  <div class="break" *ngIf="loaded && user && !user.statusVerified"></div>
+  <div routerLink="/about" class="black-link">
+    {{ appname }} {{ version }}
+  </div>
+
+  <div *ngIf="!showCurtain && languagesLoading">&nbsp;</div>
+  <div *ngIf="!showCurtain && languagesLoading" class="spinner-border spinner-border-sm"></div>
+  <div class="nav-item nav-link" ngbDropdown *ngIf="!showCurtain && !languagesLoading && languagesLoaded">
+    <a ngbDropdownToggle>
+      <fa-icon [icon]="faFlag"></fa-icon>
+    </a>
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <div ngbDropdownItem *ngFor="let lang of i18nService.getLanguageInfo()">
+        <a class="nav-item nav-link nav-link-dropdown" (click)="setLanguage(lang.id)">
+          <span>&nbsp;</span>
+          <span>{{ lang.name }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

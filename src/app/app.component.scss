@@ -1,0 +1,144 @@
+@import "variables.scss";
+
+.toolbar {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: $mainColor;
+  font-weight: 600;
+}
+
+.nav-link-emoji:hover {
+  opacity: 0.8;
+}
+
+.toolbar-nav,
+.navbar-nav {
+  margin: 0px 10px 0px 10px;
+
+  a,
+  a:visited {
+    color: $toolbarNavbarTextColor;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $secondaryColor;
+  }
+}
+
+.dropdown-item:active {
+  background-color: $dropdownActiveColor;
+}
+
+.dropdown-menu {
+  background-color: $backgroundColor;
+
+  a.nav-link-dropdown,
+  a.nav-link-dropdown:visited {
+    color: $mainColor;
+    text-decoration: none;
+  }
+
+  a.nav-link-dropdown:hover {
+    color: $tertiaryColor;
+  }
+}
+
+.setup-desktop-notifications {
+  a,
+  a:visited {
+    color: $mainColor;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $tertiaryColor;
+  }
+}
+
+.navbar-nav {
+  flex-direction: inherit;
+}
+
+.nav-item {
+  margin: 2px 2px 2px 2px;
+}
+
+.content-row {
+  width: 100%;
+}
+
+.setup-desktop-notifications {
+  .content-row {
+    display: flex;
+  }
+}
+
+.setup-desktop-notifications,
+.content-welcome {
+  margin: 8px 8px 8px 8px;
+
+  .content-row {
+    border: none;
+  }
+}
+
+.setup-desktop-notifications,
+.content-welcome,
+.content {
+  height: 100%;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer {
+  margin: 10px 10px 10px 10px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-wrap: wrap;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.account-not-verified {
+  color: $errorTextColor;
+}
+
+.error-link {
+  cursor: pointer;
+  color: $errorLinkColor;
+  text-decoration: none;
+}
+
+.error-link:hover {
+  color: $errorLinkHoverColor;
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media screen and (min-width: 600px) {
+  .content-row {
+    width: 580px;
+    margin-top: 20px;
+    border: 1px solid $borderColor;
+  }
+
+  @media screen and (min-width: 800px) {
+    .content-row {
+      width: 780px;
+    }
+  }
+}
