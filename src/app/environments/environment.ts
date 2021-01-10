@@ -40,6 +40,7 @@ export const environment = {
             surveillance: 'surveillance'
         },
         stop: 'stop',
-        refresh: 'refresh'
+        refresh: 'refresh',
+        shutdown: 'shutdown'
     }
 };

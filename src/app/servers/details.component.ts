@@ -4,7 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import { ModalConfirm } from '../_modals/confirmation.modal';
 import { LoggerService, AlertService, ServerService, I18nService, UserService } from '../_services';
@@ -16,6 +16,7 @@ import { LoggerService, AlertService, ServerService, I18nService, UserService } 
 export class DetailsComponent implements OnInit, OnDestroy {
     public loading = false;
     public deletingServer = false;
+    public shuttingDownServer = false;
     public server = null;
     public shortenSName: number = 15;
     public id: string;
@@ -38,6 +39,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public faCircle = faCircle;
     public faPlay = faPlay;
     public faStop = faStop;
+    public faPowerOff = faPowerOff;
 
     constructor(
         public i18nService: I18nService,
@@ -183,6 +185,42 @@ export class DetailsComponent implements OnInit, OnDestroy {
             () => {
                 this.logger.log('Canceling server deletion.');
                 this.deletingServer = false;
+            });
+    }
+
+    shutdownServer(id: string) {
+        this.logger.log('Shutdown server.');
+
+        this.shuttingDownServer = true;
+
+        const activeModal = this.modalService.open(ModalConfirm);
+        activeModal.componentInstance.header = this.i18nService.translate('servers.details.component.modal.shutdown.header', 'Confirm server shutdown');
+        activeModal.componentInstance.text = this.i18nService.translate('servers.details.component.modal.shutdown.text', 'Are you sure that you want to shut down the server "%sName%"?', { 'sName': this.server.name });
+        activeModal.componentInstance.text2 = this.i18nService.translate('servers.details.component.modal.shutdown.text2', 'This server will be shut down.');
+        activeModal.componentInstance.textDanger = this.i18nService.translate('servers.details.component.modal.shutdown.textDanger', '');
+        activeModal.result.then(() => {
+            this.logger.log('Shutting down server.');
+
+            if (this.sSub) {
+                this.sSub.unsubscribe();
+            }
+            this.sSub = this.serverService.shutdown(id)
+                .pipe(first())
+                .subscribe(s => {
+                    this.server = s;
+                    this.logger.log('Server shut down');
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_shutdown', 'Server "%sName%" shut down.', { 'sName': this.server.name }), { autoClose: true });
+                    this.shuttingDownServer = false;
+                },
+                    error => {
+                        this.logger.error(error);
+                        this.alertService.error(this.i18nService.translate('servers.details.component.error.server_shutdown', 'Server "%sName%" could not be shut down.', { 'sName': this.server.name }));
+                        this.shuttingDownServer = false;
+                    });
+        },
+            () => {
+                this.logger.log('Canceling server shutdown.');
+                this.shuttingDownServer = false;
             });
     }
 

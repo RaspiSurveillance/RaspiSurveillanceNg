@@ -27,6 +27,14 @@
                     <div *ngIf="refreshing" class="spinner-border spinner-border-sm"></div>
                     <fa-icon *ngIf="!refreshing" [icon]="faSync" class="normal-link fa-lg" (click)="refresh()">
                     </fa-icon>
+                    <div *ngIf="!loading && server.status != 'OFFLINE'">&nbsp;</div>
+                    <div *ngIf="!loading && server.status != 'OFFLINE'">
+                        <span *ngIf="shuttingDownServer" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!shuttingDownServer">
+                            <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="shutdownServer(server.id)">
+                            </fa-icon>
+                        </span>
+                    </div>
                     <div *ngIf="isAdmin">&nbsp;</div>
                     <div *ngIf="!loading && isAdmin">
                         <span *ngIf="deletingServer" class="spinner-border spinner-border-sm"></span>

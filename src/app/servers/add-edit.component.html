@@ -101,7 +101,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     {{ i18nService.translate('servers.addedit.component.action.save', 'Save') }}
                 </button>
-                <a routerLink="/servers" class="btn btn-link">{{ i18nService.translate('servers.addedit.component.action.cancel', 'Cancel') }}</a>
+                <a routerLink="/servers/{{ id }}" class="btn btn-link">{{ i18nService.translate('servers.addedit.component.action.cancel', 'Cancel') }}</a>
             </div>
         </form>
     </div>
