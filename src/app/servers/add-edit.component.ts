@@ -54,9 +54,16 @@ export class AddEditComponent implements OnInit, OnDestroy {
 
         this.form = this.formBuilder.group({
             name: ['', [Validators.required, Validators.maxLength(100)]],
+            urlMaster: ['', [Validators.required, Validators.maxLength(100)]],
+            idMaster: ['', [Validators.required, Validators.maxLength(100)]],
+            usernameMaster: ['', [Validators.required, Validators.maxLength(100)]],
+            passwordMaster: ['', [Validators.required, Validators.maxLength(100)]],
             url: ['', [Validators.required, Validators.maxLength(100)]],
             username: ['', [Validators.required, Validators.maxLength(100)]],
             password: ['', [Validators.required, Validators.maxLength(100)]],
+            isMaster: [false],
+            hasServiceCamerastream: [false],
+            hasServiceSurveillance: [false],
             urlCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
             usernameCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
             passwordCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
@@ -72,9 +79,16 @@ export class AddEditComponent implements OnInit, OnDestroy {
                 .pipe(first())
                 .subscribe(x => {
                     this.f.name.setValue(x.name);
+                    this.f.urlMaster.setValue(x.urlMaster);
+                    this.f.idMaster.setValue(x.idMaster);
+                    this.f.usernameMaster.setValue(x.usernameMaster);
+                    this.f.passwordMaster.setValue(x.passwordMaster);
                     this.f.url.setValue(x.url);
                     this.f.username.setValue(x.username);
                     this.f.password.setValue(x.password);
+                    this.f.isMaster.setValue(x.isMaster);
+                    this.f.hasServiceCamerastream.setValue(x.hasServiceCamerastream);
+                    this.f.hasServiceSurveillance.setValue(x.hasServiceSurveillance);
                     this.f.urlCamerastream.setValue(x.urlCamerastream);
                     this.f.usernameCamerastream.setValue(x.usernameCamerastream);
                     this.f.passwordCamerastream.setValue(x.passwordCamerastream);
@@ -157,9 +171,16 @@ export class AddEditComponent implements OnInit, OnDestroy {
         let server = new Server(
             null,
             this.form.controls.name.value,
+            this.form.controls.urlMaster.value,
+            this.form.controls.idMaster.value,
+            this.form.controls.usernameMaster.value,
+            this.form.controls.passwordMaster.value,
             this.form.controls.url.value,
             this.form.controls.username.value,
             this.form.controls.password.value,
+            this.form.controls.isMaster.value,
+            this.form.controls.hasServiceCamerastream.value,
+            this.form.controls.hasServiceSurveillance.value,
             this.form.controls.urlCamerastream.value,
             this.form.controls.usernameCamerastream.value,
             this.form.controls.passwordCamerastream.value,
@@ -193,9 +214,16 @@ export class AddEditComponent implements OnInit, OnDestroy {
         let server = new Server(
             null,
             this.form.controls.name.value,
+            this.form.controls.urlMaster.value,
+            this.form.controls.idMaster.value,
+            this.form.controls.usernameMaster.value,
+            this.form.controls.passwordMaster.value,
             this.form.controls.url.value,
             this.form.controls.username.value,
             this.form.controls.password.value,
+            this.form.controls.isMaster.value,
+            this.form.controls.hasServiceCamerastream.value,
+            this.form.controls.hasServiceSurveillance.value,
             this.form.controls.urlCamerastream.value,
             this.form.controls.usernameCamerastream.value,
             this.form.controls.passwordCamerastream.value,

@@ -73,6 +73,13 @@ export class ServerService {
         return this.http.put(url, {});
     }
 
+    startup(id: string) {
+        let url = `${environment.apiUrl}/${environment.serversPath.main}/${id}/${environment.serversPath.startup}`;
+        this.logger.log('Starting up server, URL: ' + url);
+
+        return this.http.put(url, {});
+    }
+
     shutdown(id: string) {
         let url = `${environment.apiUrl}/${environment.serversPath.main}/${id}/${environment.serversPath.shutdown}`;
         this.logger.log('Shutting down server, URL: ' + url);

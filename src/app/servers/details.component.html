@@ -27,6 +27,14 @@
                     <div *ngIf="refreshing" class="spinner-border spinner-border-sm"></div>
                     <fa-icon *ngIf="!refreshing" [icon]="faSync" class="normal-link fa-lg" (click)="refresh()">
                     </fa-icon>
+                    <div *ngIf="!loading && server.status == 'OFFLINE' && !server.isMaster">&nbsp;</div>
+                    <div *ngIf="!loading && server.status == 'OFFLINE' && !server.isMaster">
+                        <span *ngIf="startingServer" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!startingServer">
+                            <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="startServer(server.id)">
+                            </fa-icon>
+                        </span>
+                    </div>
                     <div *ngIf="!loading && server.status != 'OFFLINE'">&nbsp;</div>
                     <div *ngIf="!loading && server.status != 'OFFLINE'">
                         <span *ngIf="shuttingDownServer" class="spinner-border spinner-border-sm"></span>
@@ -54,26 +62,31 @@
                     </div>
                     <div class="item-content">
                         <span *ngIf="!loading">
+                            <fa-icon *ngIf="server.isMaster" [icon]="faCrown" class="is-master fa-lg"
+                                routerLink="{{server.id}}"></fa-icon>
+                            <br *ngIf="server.isMaster" />
                             {{ i18nService.translate('servers.details.component.status.' + (server.status ?
                             server.status : "none"), 'Status') }}
-                            <fa-icon *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE'"
-                                [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE' }"
+                            <fa-icon
+                                *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE' || server.status == 'STARTING' || server.status == 'STOPPING'"
+                                [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE', 'is-starting': server.status == 'STARTING', 'is-stopping': server.status == 'STOPPING' }"
                                 [icon]="faCircle" class="fa-lg"></fa-icon>
-                            <fa-icon *ngIf="server.status == 'CAMERA_STREAM'" [icon]="faVideo"
-                                class="fa-lg is-online"></fa-icon>
-                            <fa-icon *ngIf="server.status == 'SURVEILLANCE'" [icon]="faCamera"
-                                class="fa-lg is-online"></fa-icon>
+                            <fa-icon *ngIf="server.status == 'CAMERA_STREAM'" [icon]="faVideo" class="fa-lg is-online">
+                            </fa-icon>
+                            <fa-icon *ngIf="server.status == 'SURVEILLANCE'" [icon]="faCamera" class="fa-lg is-online">
+                            </fa-icon>
                         </span>
                         <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     </div>
                 </div>
-                <div class="list-details" *ngIf="!loading && server.status != 'OFFLINE'">
+                <div class="list-details"
+                    *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STARTING' && server.status != 'STOPPING' && (server.hasServiceCamerastream || server.hasServiceSurveillance)">
                     <div class="item-header">
                         <fa-icon [icon]="faPlay"></fa-icon>
                         <span>&nbsp;</span>
                         <span>{{ i18nService.translate('servers.details.component.actions', 'Actions') }}</span>
                     </div>
-                    <div class="item-content" *ngIf="server.status == 'ONLINE'">
+                    <div class="item-content" *ngIf="server.status == 'ONLINE' && server.hasServiceCamerastream">
                         <a (click)="startCamerastream(server.id)">
                             <fa-icon [icon]="faVideo" class="normal-link fa-lg"></fa-icon>
                             <span>&nbsp;</span>
@@ -81,7 +94,7 @@
                             camerastream') }}
                         </a>
                     </div>
-                    <div class="item-content" *ngIf="server.status == 'ONLINE'">
+                    <div class="item-content" *ngIf="server.status == 'ONLINE' && server.hasServiceSurveillance">
                         <a (click)="startSurveillance(server.id)">
                             <fa-icon [icon]="faCamera" class="normal-link fa-lg"></fa-icon>
                             <span>&nbsp;</span>
@@ -119,12 +132,13 @@
                     <div class="item-content">
                         <span *ngIf="!loading && !server.urlCamerastream">-</span>
                         <span *ngIf="!loading && server.urlCamerastream">
-                            <a href="{{ server.urlCamerastream }}" target="_blank">{{ server.urlCamerastream }}</a> ({{ server.usernameCamerastream }}/{{ server.passwordCamerastream }})
+                            <a href="{{ server.urlCamerastream }}" target="_blank">{{ server.urlCamerastream }}</a> ({{
+                            server.usernameCamerastream }}/{{ server.passwordCamerastream }})
                         </span>
                         <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     </div>
                 </div>
-                <div class="list-details" *ngIf="isAdmin">
+                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceCamerastream">
                     <div class="item-header">
                         <fa-icon [icon]="faVideo"></fa-icon>
                         <span>&nbsp;</span>
@@ -149,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-details" *ngIf="isAdmin">
+                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceSurveillance">
                     <div class="item-header">
                         <fa-icon [icon]="faCamera"></fa-icon>
                         <span>&nbsp;</span>

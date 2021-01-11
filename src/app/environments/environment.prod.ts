@@ -4,6 +4,7 @@ export const environment = {
     version: (window['env'] && window['env']['version']) ? window['env']['version'] : ' unregistered',
     signup: (window['env'] && window['env']['signup']) ? window['env']['signup'] != 'DISABLED' : true,
     appname: (window['env'] && window['env']['appname']) ? window['env']['appname'] : 'RaspiSurveillance',
+    appname_de: (window['env'] && window['env']['appname_de']) ? window['env']['appname_de'] : 'RaspiÜberwachung',
     emoji: (window['env'] && window['env']['emoji']) ? window['env']['emoji'] != 'DISABLED' : false,
     issueTracker: (window['env'] && window['env']['issueTracker']) ? window['env']['issueTracker'] : 'https://github.com/RaspiSurveillance/RaspiSurveillanceNg/issues',
     connectionPath: {
@@ -41,6 +42,7 @@ export const environment = {
         },
         stop: 'stop',
         refresh: 'refresh',
+        startup: 'startup',
         shutdown: 'shutdown'
     }
 };

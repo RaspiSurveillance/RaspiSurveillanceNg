@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 
+import { environment } from '../environments/environment';
 import { LoggerService } from './logger.service';
 
 @Injectable({
@@ -22,8 +23,15 @@ export class I18nService {
         return this.loadLanguage();
     }
 
-    setCurrentTranslations(currentTranslations) {
+    setCurrentTranslations(language, currentTranslations) {
         this.currentTranslations = currentTranslations;
+        this.currentLanguage = language;
+        
+        if (this.currentLanguage == 'de-DE') {
+            this.currentTranslations['app.name'] = environment.appname_de;
+        } else {
+            this.currentTranslations['app.name'] = environment.appname;
+        }
     }
 
     loadLanguage() {

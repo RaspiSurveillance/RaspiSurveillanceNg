@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { first } from 'rxjs/operators';
-import { faServer, faPlusCircle, faInfoCircle, faSync, faCircle, faVideo, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faServer, faPlusCircle, faInfoCircle, faSync, faCircle, faVideo, faCamera, faCrown } from '@fortawesome/free-solid-svg-icons';
 
 import { LoggerService, ServerService, AlertService, I18nService, UserService } from '../_services';
 import { Server } from '../_models';
@@ -28,6 +28,7 @@ export class ListComponent implements OnInit, OnDestroy {
     public faCircle = faCircle;
     public faVideo = faVideo;
     public faCamera = faCamera;
+    public faCrown = faCrown;
 
     constructor(
         public i18nService: I18nService,

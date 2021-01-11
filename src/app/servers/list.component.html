@@ -33,9 +33,16 @@
                     </div>
                     <div class="spacer"></div>
                     <div class="list-item-actions">
-                        <fa-icon *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE'" [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE' }" [icon]="faCircle" class="normal-link fa-lg" routerLink="{{server.id}}"></fa-icon>
-                        <fa-icon *ngIf="server.status == 'CAMERA_STREAM'" [icon]="faVideo" class="normal-link fa-lg is-online" routerLink="{{server.id}}"></fa-icon>
-                        <fa-icon *ngIf="server.status == 'SURVEILLANCE'" [icon]="faCamera" class="normal-link fa-lg is-online" routerLink="{{server.id}}"></fa-icon>
+                        <fa-icon *ngIf="server.isMaster" [icon]="faCrown" class="is-master fa-lg" routerLink="{{server.id}}"></fa-icon>
+                        <span *ngIf="server.isMaster">&nbsp;</span>
+                        <fa-icon
+                            *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE' || server.status == 'STARTING' || server.status == 'STOPPING'"
+                            [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE', 'is-starting': server.status == 'STARTING', 'is-stopping': server.status == 'STOPPING' }"
+                            [icon]="faCircle" class="fa-lg" routerLink="{{server.id}}"></fa-icon>
+                        <fa-icon *ngIf="server.status == 'CAMERA_STREAM'" [icon]="faVideo"
+                            class="fa-lg is-online" routerLink="{{server.id}}"></fa-icon>
+                        <fa-icon *ngIf="server.status == 'SURVEILLANCE'" [icon]="faCamera"
+                            class="fa-lg is-online" routerLink="{{server.id}}"></fa-icon>
                         <span>&nbsp;</span>
                         <fa-icon [icon]="faInfoCircle" class="normal-link fa-lg" routerLink="{{server.id}}"></fa-icon>
                     </div>

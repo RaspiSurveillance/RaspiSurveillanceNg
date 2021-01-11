@@ -31,12 +31,24 @@
   border-bottom: solid 1px $tableHeaderColor;
 }
 
+.is-master {
+  color: $serverIsMaster;
+}
+
 .is-online {
   color: $serverIsOnline;
 }
 
 .is-offline {
   color: $serverIsOffline;
+}
+
+.is-starting {
+  color: $serverIsStarting;
+}
+
+.is-stopping {
+  color: $serverIsStopping;
 }
 
 .list-item {

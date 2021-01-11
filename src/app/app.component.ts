@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -25,7 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public isMin: boolean;
   public version = environment.version;
   public emojiEnabled = environment.emoji;
-  public appname = environment.appname;
   public showCurtain: boolean;
   public showEmoji: boolean;
   private ussSub: Subscription;
@@ -49,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public faTimes = faTimes;
 
   constructor(
+    private titleService: Title,
     public emojiService: EmojiService,
     public i18nService: I18nService,
     private languageService: LanguageService,
@@ -62,6 +63,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loaded = false;
     this.languagesLoaded = false;
     this.showCurtain = true;
+
+    this.titleService.setTitle(i18nService.translate('app.name', 'RaspiSurveillance'));
 
     if (this.rtSub) {
       this.rtSub.unsubscribe();
@@ -239,9 +242,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     this.langSub = this.languageService.getLanguage(language)
       .pipe(first())
-      .subscribe(language => {
+      .subscribe(translations => {
         this.logger.log('Successfully loaded language');
-        this.i18nService.setCurrentTranslations(language);
+        this.i18nService.setCurrentTranslations(language, translations);
+        this.titleService.setTitle(this.i18nService.translate('app.name', 'RaspiSurveillance'));
         this.languagesLoaded = true;
         this.languagesLoading = false;
         this.showCurtain = false;

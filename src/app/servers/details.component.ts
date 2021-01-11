@@ -4,7 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import { ModalConfirm } from '../_modals/confirmation.modal';
 import { LoggerService, AlertService, ServerService, I18nService, UserService } from '../_services';
@@ -17,6 +17,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public loading = false;
     public deletingServer = false;
     public shuttingDownServer = false;
+    public startingServer = false;
     public server = null;
     public shortenSName: number = 15;
     public id: string;
@@ -24,8 +25,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public refreshing = false;
     private rtSub: Subscription;
     private sSub: Subscription;
+    private ssSub: Subscription;
     private obSub: Subscription;
 
+    public faCrown = faCrown;
     public faSync = faSync;
     public faInfo = faInfo;
     public faServer = faServer;
@@ -70,6 +73,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
         }
         if (this.sSub) {
             this.sSub.unsubscribe();
+        }
+        if (this.ssSub) {
+            this.ssSub.unsubscribe();
         }
         if (this.obSub) {
             this.obSub.unsubscribe();
@@ -222,6 +228,29 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 this.logger.log('Canceling server shutdown.');
                 this.shuttingDownServer = false;
             });
+    }
+
+    startServer(id: string) {
+        this.logger.log('Starting server.');
+
+        this.startingServer = true;
+
+            if (this.ssSub) {
+                this.ssSub.unsubscribe();
+            }
+            this.ssSub = this.serverService.startup(id)
+                .pipe(first())
+                .subscribe(s => {
+                    this.server = s;
+                    this.logger.log('Server starting');
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_startup', 'Server "%sName%" starting.', { 'sName': this.server.name }), { autoClose: true });
+                    this.startingServer = false;
+                },
+                    error => {
+                        this.logger.error(error);
+                        this.alertService.error(this.i18nService.translate('servers.details.component.error.server_startup', 'Server "%sName%" could not be started.', { 'sName': this.server.name }));
+                        this.startingServer = false;
+                    });
     }
 
     startCamerastream(id: string) {

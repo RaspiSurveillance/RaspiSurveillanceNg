@@ -7,7 +7,7 @@
         {{ emojiService.getCurrentEmoji() }}
       </span>
       <span>&nbsp;</span>
-      <span>{{ appname }}</span>
+      <span>{{ i18nService.translate('app.name', 'RaspiSurveillance') }}</span>
     </a>
   </div>
 
@@ -86,10 +86,10 @@
   <div class="content-row">
     <div class="content-item">
       <h2>
-        {{ i18nService.translate('app.component.welcome.header', 'Welcome to %appName%!', { 'appName': appname }) }}
+        {{ i18nService.translate('app.component.welcome.header', 'Welcome to %appName%!', { 'appName': i18nService.translate('app.name', 'RaspiSurveillance') }) }}
       </h2>
       <div>
-        {{ i18nService.translate('app.component.welcome.text', '%appName% is a surveillance tool to watch your house.', { 'appName': appname }) }}
+        {{ i18nService.translate('app.component.welcome.text', '%appName% is a surveillance tool to watch your house.', { 'appName': i18nService.translate('app.name', 'RaspiSurveillance') }) }}
         <br />
         {{ i18nService.translate('app.component.welcome.text2', 'Start a camerastream or an on-going surveillance that notifies you.') }}
       </div>
@@ -132,7 +132,7 @@
   </div>
   <div class="break" *ngIf="loaded && user && !user.statusVerified"></div>
   <div routerLink="/about" class="black-link">
-    {{ appname }} {{ version }}
+    {{ i18nService.translate('app.name', 'RaspiSurveillance') }} {{ version }}
   </div>
 
   <div *ngIf="!showCurtain && languagesLoading">&nbsp;</div>

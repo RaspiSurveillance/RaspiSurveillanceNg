@@ -51,6 +51,71 @@
             </div>
             <div class="form-row">
                 <div class="form-group col">
+                    <label for="urlMaster">{{ i18nService.translate('servers.addedit.component.urlMaster', 'URL Master') }}</label>
+                    <input type="text" formControlName="urlMaster" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.urlMaster', 'Enter URL Master') }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.urlMaster.errors }" [attr.disabled]="loading || null" />
+                    <div *ngIf="submitted && f.urlMaster.errors" class="invalid-feedback">
+                        <div *ngIf="f.urlMaster.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.urlMaster', 'URL Master is required') }}</div>
+                        <div *ngIf="f.urlMaster.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.urlMaster', 'URL Master can be at most 100 characters') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="idMaster">{{ i18nService.translate('servers.addedit.component.idMaster', 'ID Master') }}</label>
+                    <input type="text" formControlName="idMaster" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.idMaster', 'Enter ID Master') }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.idMaster.errors }" [attr.disabled]="loading || null" />
+                    <div *ngIf="submitted && f.idMaster.errors" class="invalid-feedback">
+                        <div *ngIf="f.idMaster.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.idMaster', 'ID Master is required') }}</div>
+                        <div *ngIf="f.idMaster.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.idMaster', 'ID Master can be at most 100 characters') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="usernameMaster">{{ i18nService.translate('servers.addedit.component.usernameMaster', 'Username Master') }}</label>
+                    <input type="text" formControlName="usernameMaster" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.usernameMaster', 'Enter Username Master') }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.usernameMaster.errors }" [attr.disabled]="loading || null" />
+                    <div *ngIf="submitted && f.usernameMaster.errors" class="invalid-feedback">
+                        <div *ngIf="f.usernameMaster.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.usernameMaster', 'Username Master is required') }}</div>
+                        <div *ngIf="f.usernameMaster.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.usernameMaster', 'Username Master can be at most 100 characters') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="passwordMaster">{{ i18nService.translate('servers.addedit.component.passwordMaster', 'Password Master') }}</label>
+                    <input type="text" formControlName="passwordMaster" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.passwordMaster', 'Enter Password Master') }}"
+                        [ngClass]="{ 'is-invalid': submitted && f.passwordMaster.errors }" [attr.disabled]="loading || null" />
+                    <div *ngIf="submitted && f.passwordMaster.errors" class="invalid-feedback">
+                        <div *ngIf="f.passwordMaster.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.passwordMaster', 'Password Master is required') }}</div>
+                        <div *ngIf="f.passwordMaster.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.passwordMaster', 'Password Master can be at most 100 characters') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="isMaster-check">{{ i18nService.translate('servers.addedit.component.isMaster', 'Mark server as master') }}</label>
+                    <input type="checkbox" id="isMaster-check" formControlName="isMaster" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.isMaster.errors }" [attr.disabled]="loading || null" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="hasServiceCamerastream-check">{{ i18nService.translate('servers.addedit.component.hasServiceCamerastream', 'Mark as having service camerastream') }}</label>
+                    <input type="checkbox" id="hasServiceCamerastream-check" formControlName="hasServiceCamerastream" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.hasServiceCamerastream.errors }" [attr.disabled]="loading || null" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="hasServiceSurveillance-check">{{ i18nService.translate('servers.addedit.component.hasServiceSurveillance', 'Mark as having service surveillance') }}</label>
+                    <input type="checkbox" id="hasServiceSurveillance-check" formControlName="hasServiceSurveillance" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.hasServiceSurveillance.errors }" [attr.disabled]="loading || null" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
                     <label for="urlCamerastream">{{ i18nService.translate('servers.addedit.component.urlCamerastream', 'URL Camerastream') }}</label>
                     <input type="text" formControlName="urlCamerastream" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.urlCamerastream', 'Enter URL Camerastream') }}"
                         [ngClass]="{ 'is-invalid': submitted && f.urlCamerastream.errors }" [attr.disabled]="loading || null" />
@@ -62,12 +127,12 @@
             </div>
             <div class="form-row">
                 <div class="form-group col">
-                    <label for="usernameCamerastream">{{ i18nService.translate('servers.addedit.component.usernameCamerastream', 'Name Camerastream') }}</label>
-                    <input type="text" formControlName="usernameCamerastream" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.usernameCamerastream', 'Enter Name Camerastream') }}"
+                    <label for="usernameCamerastream">{{ i18nService.translate('servers.addedit.component.usernameCamerastream', 'Username Camerastream') }}</label>
+                    <input type="text" formControlName="usernameCamerastream" class="form-control" placeholder="{{ i18nService.translate('servers.addedit.component.placeholder.usernameCamerastream', 'Enter Username Camerastream') }}"
                         [ngClass]="{ 'is-invalid': submitted && f.usernameCamerastream.errors }" [attr.disabled]="loading || null" />
                     <div *ngIf="submitted && f.usernameCamerastream.errors" class="invalid-feedback">
-                        <div *ngIf="f.usernameCamerastream.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.usernameCamerastream', 'Name Camerastream is required') }}</div>
-                        <div *ngIf="f.usernameCamerastream.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.usernameCamerastream', 'Name Camerastream can be at most 100 characters') }}</div>
+                        <div *ngIf="f.usernameCamerastream.errors.required">{{ i18nService.translate('servers.addedit.component.validation.required.usernameCamerastream', 'Username Camerastream is required') }}</div>
+                        <div *ngIf="f.usernameCamerastream.errors.maxlength">{{ i18nService.translate('servers.addedit.component.validation.max.usernameCamerastream', 'Username Camerastream can be at most 100 characters') }}</div>
                     </div>
                 </div>
             </div>
