@@ -70,7 +70,7 @@ services:
       - ./data/certificates:/etc/certificates
     environment:
       - API_URL=https://<apiUrl>/api
-      - VERSION=1.5.4
+      - VERSION=1.1.0
       - SIGNUP=DISABLED
       - APPNAME=RaspiSurveillance
       - APPNAME_DE=RaspiÜberwachung
