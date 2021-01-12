@@ -27,7 +27,7 @@
         <div *ngIf="servers.length > 0">
             <div *ngFor="let server of servers; let i = index">
                 <div class="list-item" routerLink="{{server.id}}" [class.stripe-non]="i % 2 != 0"
-                    [class.stripe]="i % 2 == 0">
+                    [class.stripe]="i % 2 == 0" *ngIf="isAdmin || (server.hasServiceCamerastream || server.hasServiceSurveillance)">
                     <div class="list-item-description">
                         {{ server.name | shorten:shortenSName }}
                     </div>
