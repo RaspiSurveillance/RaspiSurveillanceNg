@@ -138,7 +138,7 @@
                         <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     </div>
                 </div>
-                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceCamerastream">
+                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceCamerastream && server.status == 'CAMERA_STREAM'">
                     <div class="item-header">
                         <fa-icon [icon]="faVideo"></fa-icon>
                         <span>&nbsp;</span>
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceSurveillance">
+                <div class="list-details" *ngIf="!loading && isAdmin && server.hasServiceSurveillance && server.status == 'SURVEILLANCE'">
                     <div class="item-header">
                         <fa-icon [icon]="faCamera"></fa-icon>
                         <span>&nbsp;</span>
