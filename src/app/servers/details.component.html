@@ -35,8 +35,8 @@
                             </fa-icon>
                         </span>
                     </div>
-                    <div *ngIf="!loading && server.status != 'OFFLINE' && !server.isMaster">&nbsp;</div>
-                    <div *ngIf="!loading && server.status != 'OFFLINE' && !server.isMaster">
+                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && !server.isMaster">&nbsp;</div>
+                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && !server.isMaster">
                         <span *ngIf="shuttingDownServer" class="spinner-border spinner-border-sm"></span>
                         <span *ngIf="!shuttingDownServer">
                             <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="shutdownServer(server.id)">
