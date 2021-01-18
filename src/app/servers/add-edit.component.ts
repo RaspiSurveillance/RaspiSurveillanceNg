@@ -54,19 +54,19 @@ export class AddEditComponent implements OnInit, OnDestroy {
 
         this.form = this.formBuilder.group({
             name: ['', [Validators.required, Validators.maxLength(100)]],
-            urlMaster: ['', [Validators.required, Validators.maxLength(100)]],
-            idMaster: ['', [Validators.required, Validators.maxLength(100)]],
-            usernameMaster: ['', [Validators.required, Validators.maxLength(100)]],
-            passwordMaster: ['', [Validators.required, Validators.maxLength(100)]],
+            urlMaster: ['', [Validators.maxLength(100)]],
+            idMaster: ['', [Validators.maxLength(100)]],
+            usernameMaster: ['', [Validators.maxLength(100)]],
+            passwordMaster: ['', [Validators.maxLength(100)]],
             url: ['', [Validators.required, Validators.maxLength(100)]],
-            username: ['', [Validators.required, Validators.maxLength(100)]],
-            password: ['', [Validators.required, Validators.maxLength(100)]],
+            username: ['', [Validators.maxLength(100)]],
+            password: ['', [Validators.maxLength(100)]],
             isMaster: [false],
             hasServiceCamerastream: [false],
             hasServiceSurveillance: [false],
-            urlCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
-            usernameCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
-            passwordCamerastream: ['', [Validators.required, Validators.maxLength(100)]],
+            urlCamerastream: ['', [Validators.maxLength(100)]],
+            usernameCamerastream: ['', [Validators.maxLength(100)]],
+            passwordCamerastream: ['', [Validators.maxLength(100)]],
             attributesCamerastream: [null],
             attributesSurveillance: [null]
         });

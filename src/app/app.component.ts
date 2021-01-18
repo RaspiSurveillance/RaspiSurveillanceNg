@@ -99,9 +99,9 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.obSub) {
       this.obSub.unsubscribe();
     }
-    this.obSub = this.observer.observe(['(min-width: 510px)']).subscribe(result => {
+    this.obSub = this.observer.observe(['(min-width: 520px)']).subscribe(result => {
       if (result.matches) {
-        this.isMin = result.breakpoints['(min-width: 510px)'];
+        this.isMin = result.breakpoints['(min-width: 520px)'];
       } else {
         this.isMin = false;
       }

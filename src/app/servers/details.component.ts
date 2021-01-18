@@ -130,25 +130,25 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     observerScreenSize(): void {
         this.obSub = this.observer.observe([
-            '(min-width: 300px)',
-            '(min-width: 400px)',
-            '(min-width: 500px)',
-            '(min-width: 600px)',
-            '(min-width: 700px)',
+            '(min-width: 280px)',
+            '(min-width: 380px)',
+            '(min-width: 480px)',
+            '(min-width: 580px)',
+            '(min-width: 680px)',
             '(min-width: 800px)'
         ]).subscribe(result => {
             if (result.matches) {
                 if (result.breakpoints['(min-width: 800px)']) {
                     this.shortenSName = 85;
-                } else if (result.breakpoints['(min-width: 700px)']) {
+                } else if (result.breakpoints['(min-width: 680px)']) {
                     this.shortenSName = 60;
-                } else if (result.breakpoints['(min-width: 600px)']) {
+                } else if (result.breakpoints['(min-width: 580px)']) {
                     this.shortenSName = 60;
-                } else if (result.breakpoints['(min-width: 500px)']) {
+                } else if (result.breakpoints['(min-width: 480px)']) {
                     this.shortenSName = 50;
-                } else if (result.breakpoints['(min-width: 400px)']) {
+                } else if (result.breakpoints['(min-width: 380px)']) {
                     this.shortenSName = 32;
-                } else if (result.breakpoints['(min-width: 300px)']) {
+                } else if (result.breakpoints['(min-width: 280px)']) {
                     this.shortenSName = 24;
                 } else {
                     this.shortenSName = 20;

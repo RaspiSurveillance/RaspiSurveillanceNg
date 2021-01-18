@@ -25,25 +25,23 @@
                     </div>
                     <div class="spacer"></div>
                     <div *ngIf="refreshing" class="spinner-border spinner-border-sm"></div>
-                    <fa-icon *ngIf="!refreshing" [icon]="faSync" class="normal-link fa-lg" (click)="refresh()">
-                    </fa-icon>
-                    <div *ngIf="!loading && server.status == 'OFFLINE' && !server.isMaster">&nbsp;</div>
+                    <fa-icon *ngIf="!refreshing" [icon]="faSync" class="normal-link fa-lg" (click)="refresh()"></fa-icon>
+                    <div *ngIf="!loading && server.status == 'OFFLINE' && !server.isMaster">&nbsp;&nbsp;</div>
                     <div *ngIf="!loading && server.status == 'OFFLINE' && !server.isMaster">
                         <span *ngIf="startingServer" class="spinner-border spinner-border-sm"></span>
                         <span *ngIf="!startingServer">
-                            <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="startServer(server.id)">
-                            </fa-icon>
+                            <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="startServer(server.id)"></fa-icon>
                         </span>
                     </div>
-                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && !server.isMaster">&nbsp;</div>
-                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && !server.isMaster">
+                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && server.status != 'INITIALIZING' && !server.isMaster">&nbsp;&nbsp;</div>
+                    <div *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STOPPING' && server.status != 'INITIALIZING' && !server.isMaster">
                         <span *ngIf="shuttingDownServer" class="spinner-border spinner-border-sm"></span>
                         <span *ngIf="!shuttingDownServer">
                             <fa-icon [icon]="faPowerOff" class="black-link fa-lg" (click)="shutdownServer(server.id)">
                             </fa-icon>
                         </span>
                     </div>
-                    <div *ngIf="isAdmin">&nbsp;</div>
+                    <div *ngIf="isAdmin">&nbsp;&nbsp;</div>
                     <div *ngIf="!loading && isAdmin">
                         <span *ngIf="deletingServer" class="spinner-border spinner-border-sm"></span>
                         <span *ngIf="!deletingServer">
@@ -65,11 +63,10 @@
                             <fa-icon *ngIf="server.isMaster" [icon]="faCrown" class="is-master fa-lg"
                                 routerLink="{{server.id}}"></fa-icon>
                             <br *ngIf="server.isMaster" />
-                            {{ i18nService.translate('servers.details.component.status.' + (server.status ?
-                            server.status : "none"), 'Status') }}
+                            {{ i18nService.translate('servers.details.component.status.' + (server.status ? server.status : "none"), 'Status') }}
                             <fa-icon
-                                *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE' || server.status == 'STARTING' || server.status == 'STOPPING'"
-                                [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE', 'is-starting': server.status == 'STARTING', 'is-stopping': server.status == 'STOPPING' }"
+                                *ngIf="server.status == 'ONLINE' || server.status == 'OFFLINE' || server.status == 'STARTING' || server.status == 'STOPPING' || server.status == 'INITIALIZING'"
+                                [ngClass]="{ 'is-online': server.status == 'ONLINE', 'is-offline': server.status == 'OFFLINE', 'is-starting': server.status == 'STARTING', 'is-stopping': server.status == 'STOPPING', 'is-initializing': server.status == 'INITIALIZING' }"
                                 [icon]="faCircle" class="fa-lg"></fa-icon>
                             <fa-icon *ngIf="server.status == 'CAMERA_STREAM'" [icon]="faVideo" class="fa-lg is-online">
                             </fa-icon>
@@ -80,7 +77,7 @@
                     </div>
                 </div>
                 <div class="list-details"
-                    *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STARTING' && server.status != 'STOPPING' && (server.hasServiceCamerastream || server.hasServiceSurveillance)">
+                    *ngIf="!loading && server.status != 'OFFLINE' && server.status != 'STARTING' && server.status != 'STOPPING' && server.status != 'INITIALIZING' && (server.hasServiceCamerastream || server.hasServiceSurveillance)">
                     <div class="item-header">
                         <fa-icon [icon]="faPlay"></fa-icon>
                         <span>&nbsp;</span>
@@ -132,8 +129,9 @@
                     <div class="item-content">
                         <span *ngIf="!loading && !server.urlCamerastream">-</span>
                         <span *ngIf="!loading && server.urlCamerastream">
-                            <a href="{{ server.urlCamerastream }}" target="_blank">{{ server.urlCamerastream }}</a> ({{
-                            server.usernameCamerastream }}/{{ server.passwordCamerastream }})
+                            <a href="{{ server.urlCamerastream }}" target="_blank">
+                                {{ server.urlCamerastream }}
+                            </a> ({{server.usernameCamerastream }}/{{ server.passwordCamerastream }})
                         </span>
                         <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                     </div>
@@ -142,8 +140,9 @@
                     <div class="item-header">
                         <fa-icon [icon]="faVideo"></fa-icon>
                         <span>&nbsp;</span>
-                        <span>{{ i18nService.translate('servers.details.component.attributesCamerastream', 'Attributes
-                            Camerastream') }}</span>
+                        <span>
+                            {{ i18nService.translate('servers.details.component.attributesCamerastream', 'Attributes Camerastream') }}
+                        </span>
                     </div>
                     <div class="item-content">
                         <div *ngIf="loading" class="spinner-border spinner-border-sm user-spinner"></div>
@@ -167,8 +166,9 @@
                     <div class="item-header">
                         <fa-icon [icon]="faCamera"></fa-icon>
                         <span>&nbsp;</span>
-                        <span>{{ i18nService.translate('servers.details.component.attributesSurveillance', 'Attributes
-                            Camerastream') }}</span>
+                        <span>
+                            {{ i18nService.translate('servers.details.component.attributesSurveillance', 'Attributes Surveillance') }}
+                        </span>
                     </div>
                     <div class="item-content">
                         <div *ngIf="loading" class="spinner-border spinner-border-sm user-spinner"></div>

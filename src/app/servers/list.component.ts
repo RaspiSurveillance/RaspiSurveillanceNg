@@ -72,7 +72,7 @@ export class ListComponent implements OnInit, OnDestroy {
             .subscribe(servers => {
                 this.servers = servers;
                 if (!this.isAdmin) {
-                    this.servers = this.servers.filter(x => x.hasServiceCamerastream || x.hasServiceSurveillance);
+                    this.servers = this.servers.filter(x => x.status != 'INITIALIZING' && (x.hasServiceCamerastream || x.hasServiceSurveillance));
                 }
                 servers.sort(function (a: Server, b: Server) {
                     return a.name.localeCompare(b.name);
