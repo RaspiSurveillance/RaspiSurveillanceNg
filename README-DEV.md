@@ -27,6 +27,7 @@ Backend server: RaspiSurveillanceServer: https://github.com/RaspiSurveillance/Ra
 - "docker login"
 - "docker tag raspisurveillance-ng <dockerName>/raspisurveillance-ng:<version>"
 - "docker push <dockerName>/raspisurveillance-ng:<version>"
+- Change "production: true" in "src/environments/environments.ts" (--prod currently not working...)
 
 ## Run the software
 
