@@ -4,7 +4,12 @@ An angular client for surveillance with the RaspiSurveillanceServer.
 
 ## Copyright
 
-2020-2021 Denis Meyer, https://github.com/CallToPower
+2020-2022 Denis Meyer, https://github.com/CallToPower
+
+# Information
+
+- https://tecadmin.net/how-to-install-nvm-on-ubuntu-20-04/
+- https://nodejs.org/en/
 
 ## Concept
 
@@ -23,10 +28,10 @@ This software is provided via docker. More information in the producation and de
 
 Available docker images:
 
-- calltopower/raspisurveillance-flyway:1.1.2
-- calltopower/raspisurveillance-db:1.1.2
-- calltopower/raspisurveillance-server:1.1.2
-- calltopower/raspisurveillance-ng:1.1.2
+- calltopower/raspisurveillance-flyway:1.2.1
+- calltopower/raspisurveillance-db:1.2.1
+- calltopower/raspisurveillance-server:1.2.1
+- calltopower/raspisurveillance-ng:1.2.1
 
 ## Production and development documentation
 
