@@ -56,10 +56,10 @@
                 {{ i18nService.translate('servers.addedit.component.subheader.master_server', 'Master Server') }}
             </div>
             <div class="section">
-                <div class="form-row">
+                <div class="form-row form-row-space">
                     <div class="form-group col">
-                        <label for="isMaster-check">{{ i18nService.translate('servers.addedit.component.isMaster', 'Mark server as master') }}</label>
-                        <input type="checkbox" id="isMaster-check" formControlName="isMaster" class="form-control"
+                        <label for="isMaster-check">{{ i18nService.translate('servers.addedit.component.isMaster', 'Mark server as master') }}</label><br />
+                        <input type="checkbox" id="isMaster-check" formControlName="isMaster"
                             [ngClass]="{ 'is-invalid': submitted && f.isMaster.errors }" [attr.disabled]="loading || null" />
                     </div>
                 </div>
@@ -108,17 +108,17 @@
                 Services
             </div>
             <div class="section">
-                <div class="form-row">
+                <div class="form-row form-row-space">
                     <div class="form-group col">
-                        <label for="hasServiceCamerastream-check">{{ i18nService.translate('servers.addedit.component.hasServiceCamerastream', 'Mark as having service camerastream') }}</label>
-                        <input type="checkbox" id="hasServiceCamerastream-check" formControlName="hasServiceCamerastream" class="form-control"
+                        <label for="hasServiceCamerastream-check">{{ i18nService.translate('servers.addedit.component.hasServiceCamerastream', 'Mark as having service camerastream') }}</label><br />
+                        <input type="checkbox" id="hasServiceCamerastream-check" formControlName="hasServiceCamerastream"
                             [ngClass]="{ 'is-invalid': submitted && f.hasServiceCamerastream.errors }" [attr.disabled]="loading || null" />
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row form-row-space">
                     <div class="form-group col">
-                        <label for="hasServiceSurveillance-check">{{ i18nService.translate('servers.addedit.component.hasServiceSurveillance', 'Mark as having service surveillance') }}</label>
-                        <input type="checkbox" id="hasServiceSurveillance-check" formControlName="hasServiceSurveillance" class="form-control"
+                        <label for="hasServiceSurveillance-check">{{ i18nService.translate('servers.addedit.component.hasServiceSurveillance', 'Mark as having service surveillance') }}</label><br />
+                        <input type="checkbox" id="hasServiceSurveillance-check" formControlName="hasServiceSurveillance"
                             [ngClass]="{ 'is-invalid': submitted && f.hasServiceSurveillance.errors }" [attr.disabled]="loading || null" />
                     </div>
                 </div>

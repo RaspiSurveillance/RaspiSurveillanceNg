@@ -9,6 +9,8 @@ npm install -g @angular/cli@latest
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Add `--open` to automatically open in browser.
 
+(~/.npm-global/bin/ng serve)
+
 ## Requirements
 
 Backend server: RaspiSurveillanceServer: https://github.com/RaspiSurveillance/RaspiSurveillanceServer
