@@ -5,15 +5,20 @@ Based on Angular, SCSS, FontAwesome, Bootstrap and more.
 ## Development server
 
 npm install
-npm install -g @angular/cli@latest
+npm run ng serve
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Add `--open` to automatically open in browser.
-
-(~/.npm-global/bin/ng serve)
+Run `ng serve` (or `npm run ng serve`) for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Add `--open` to automatically open in browser.
 
 ## Requirements
 
-Backend server: RaspiSurveillanceServer: https://github.com/RaspiSurveillance/RaspiSurveillanceServer
+- sudo apt install nodejs npm
+- npm install
+    - On the command line, in your home directory, create a directory for global installations: mkdir ~/.npm-global
+    - Configure npm to use the new directory path: npm config set prefix '~/.npm-global'
+    - In your preferred text editor, open or create a ~/.profile file and add this line: export PATH=~/.npm-global/bin:$PATH
+    - On the command line, update your system variables: source ~/.profile
+- npm install -g @angular/cli (npm install -g @angular/cli@latest)
+- Backend server: RaspiSurveillanceServer: https://github.com/RaspiSurveillance/RaspiSurveillanceServer
 
 ### Docker
 

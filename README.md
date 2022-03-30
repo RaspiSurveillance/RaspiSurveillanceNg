@@ -28,10 +28,10 @@ This software is provided via docker. More information in the producation and de
 
 Available docker images:
 
-- calltopower/raspisurveillance-flyway:1.3.1
-- calltopower/raspisurveillance-db:1.3.1
-- calltopower/raspisurveillance-server:1.3.1
-- calltopower/raspisurveillance-ng:1.3.1
+- calltopower/raspisurveillance-flyway:1.4.0
+- calltopower/raspisurveillance-db:1.4.0
+- calltopower/raspisurveillance-server:1.4.0
+- calltopower/raspisurveillance-ng:1.4.0
 
 ## Production and development documentation
 
