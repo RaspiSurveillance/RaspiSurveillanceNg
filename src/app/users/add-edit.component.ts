@@ -94,7 +94,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
     onSubmit() {
         this.loading = true;
         this.submitted = true;
-        this.alertService.clear();
+        this.alertService.clearAll();
 
         if (this.form.invalid) {
             this.loading = false;
@@ -122,7 +122,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
                 data => {
                     this.logger.log('User successfully added.');
                     this.router.navigate(['.', { relativeTo: this.route }]);
-                    this.alertService.success(this.i18nService.translate('users.addedit.component.success.user_add', 'User successfully added.'), { autoClose: true });
+                    this.alertService.success(this.i18nService.translate('users.addedit.component.success.user_add', 'User successfully added.'));
                     this.loading = false;
                 },
                 error => {
@@ -144,7 +144,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
                     if (!data.signedOut) {
                         this.router.navigate(['..', { relativeTo: this.route }]);
                     }
-                    this.alertService.success(this.i18nService.translate('users.addedit.component.success.user_update', 'User successfully updated.'), { autoClose: true });
+                    this.alertService.success(this.i18nService.translate('users.addedit.component.success.user_update', 'User successfully updated.'));
                     this.loading = false;
                 },
                 error => {

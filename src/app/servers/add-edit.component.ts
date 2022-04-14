@@ -114,7 +114,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.submitted = true;
 
-        this.alertService.clear();
+        this.alertService.clearAll();
 
         if (this.form.invalid) {
             this.loading = false;
@@ -197,7 +197,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
                 data => {
                     this.logger.log('Server successfully created');
                     this.router.navigate(['/servers', data['id']]);
-                    this.alertService.success(this.i18nService.translate('servers.addedit.component.success.server_created', 'Server successfully created.'), { autoClose: true });
+                    this.alertService.success(this.i18nService.translate('servers.addedit.component.success.server_created', 'Server successfully created.'));
                 },
                 error => {
                     this.logger.error(error);
@@ -240,7 +240,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
                 data => {
                     this.logger.log('Server successfully updated');
                     this.router.navigate(['/servers', data['id']]);
-                    this.alertService.success(this.i18nService.translate('servers.addedit.component.success.server_updated', 'Server successfully updated.'), { autoClose: true });
+                    this.alertService.success(this.i18nService.translate('servers.addedit.component.success.server_updated', 'Server successfully updated.'));
                 },
                 error => {
                     this.logger.error(error);

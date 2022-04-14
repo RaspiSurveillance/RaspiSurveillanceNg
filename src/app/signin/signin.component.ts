@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.submitted = true;
 
-        this.alertService.clear();
+        this.alertService.clearAll();
 
         if (this.form.invalid) {
             this.loading = false;
@@ -74,7 +74,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 
                     this.router.navigate([this.returnUrl]);
                     this.alertService.clearAll();
-                    this.alertService.success(this.i18nService.translate('signin.component.sign_in_success', 'Signed in successfully.'), { autoClose: true });
+                    this.alertService.success(this.i18nService.translate('signin.component.sign_in_success', 'Signed in successfully.'));
                 },
                 error => {
                     this.logger.error(error);

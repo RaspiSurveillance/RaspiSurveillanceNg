@@ -70,7 +70,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.submitted = true;
 
-        this.alertService.clear();
+        this.alertService.clearAll();
 
         if (this.form.invalid) {
             this.loading = false;
@@ -87,7 +87,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
                     this.logger.log('Successfully verified user. Please sign in again.');
 
                     this.router.navigate(['/']);
-                    this.alertService.success(this.i18nService.translate('users.verify.component.success.verify', 'Successfully verified user. Please sign in again.'), { persistent: true });
+                    this.alertService.success(this.i18nService.translate('users.verify.component.success.verify', 'Successfully verified user. Please sign in again.'), { autoClose: false });
                 },
                 error => {
                     this.logger.error(error);
@@ -98,7 +98,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
     resendVerification() {
         this.loading = true;
-        this.alertService.clear();
+        this.alertService.clearAll();
 
         const activeModal = this.modalService.open(ModalConfirm);
         activeModal.componentInstance.header = this.i18nService.translate('users.verify.component.modal.remove_role.header', 'Confirm resending verification');
@@ -118,7 +118,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
                     data => {
                         this.logger.log('Successfully resent verification. Please check your emails.');
 
-                        this.alertService.success(this.i18nService.translate('users.verify.component.success.resend', 'Successfully resent verification. Please check your emails.'), { autoClose: true });
+                        this.alertService.success(this.i18nService.translate('users.verify.component.success.resend', 'Successfully resent verification. Please check your emails.'));
                         this.loading = false;
                     },
                     error => {

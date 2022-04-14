@@ -180,7 +180,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 .subscribe(() => {
                     this.logger.log('Server deleted');
                     this.router.navigate(['/servers']);
-                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_delete', 'Server "%sName%" deleted.', { 'sName': this.server.name }), { autoClose: true });
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_delete', 'Server "%sName%" deleted.', { 'sName': this.server.name }));
                 },
                     error => {
                         this.logger.error(error);
@@ -215,7 +215,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 .subscribe(s => {
                     this.server = s;
                     this.logger.log('Server shut down');
-                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_shutdown', 'Server "%sName%" shut down.', { 'sName': this.server.name }), { autoClose: true });
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_shutdown', 'Server "%sName%" shut down.', { 'sName': this.server.name }));
                     this.shuttingDownServer = false;
                 },
                     error => {
@@ -243,7 +243,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 .subscribe(s => {
                     this.server = s;
                     this.logger.log('Server starting');
-                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_startup', 'Server "%sName%" starting.', { 'sName': this.server.name }), { autoClose: true });
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_startup', 'Server "%sName%" starting.', { 'sName': this.server.name }));
                     this.startingServer = false;
                 },
                     error => {
@@ -261,7 +261,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             .subscribe(s => {
                 this.server = s;
                 this.logger.log('Started camerastream');
-                this.alertService.info(this.i18nService.translate('servers.details.component.success.camerastream_start', 'Started camerastream on server "%sName%".', { 'sName': this.server.name }), { autoClose: true });
+                this.alertService.info(this.i18nService.translate('servers.details.component.success.camerastream_start', 'Started camerastream on server "%sName%".', { 'sName': this.server.name }));
             },
                 error => {
                     this.logger.error(error);
@@ -277,7 +277,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             .subscribe(s => {
                 this.server = s;
                 this.logger.log('Started surveillance');
-                this.alertService.info(this.i18nService.translate('servers.details.component.success.surveillance_start', 'Started surveillance on server "%sName%".', { 'sName': this.server.name }), { autoClose: true });
+                this.alertService.info(this.i18nService.translate('servers.details.component.success.surveillance_start', 'Started surveillance on server "%sName%".', { 'sName': this.server.name }));
             },
                 error => {
                     this.logger.error(error);
@@ -293,7 +293,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             .subscribe(s => {
                 this.server = s;
                 this.logger.log('Stopped services');
-                this.alertService.info(this.i18nService.translate('servers.details.component.success.stop', 'Stopped services on server "%sName%".', { 'sName': this.server.name }), { autoClose: true });
+                this.alertService.info(this.i18nService.translate('servers.details.component.success.stop', 'Stopped services on server "%sName%".', { 'sName': this.server.name }));
             },
                 error => {
                     this.logger.error(error);
