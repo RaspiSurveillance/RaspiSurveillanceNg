@@ -2,8 +2,6 @@
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Alert, AlertType } from '../_models';
-
 @Injectable({
     providedIn: 'root'
 })
