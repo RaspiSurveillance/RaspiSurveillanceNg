@@ -160,7 +160,7 @@ input[type="password"] {
 }
 
 .list-details {
-  margin: 10px 0px 10px 0px;
+  margin: 0;
 
   .item-header {
     background-color: $itemHeaderBGColor;
@@ -173,7 +173,6 @@ input[type="password"] {
 }
 
 .list-details-warn {
-  margin-bottom: 0;
   background: #f88cab5e;
 }
 
