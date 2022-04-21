@@ -4,7 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { faCrown, faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation, faCrown, faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import { ModalConfirm } from '../_modals/confirmation.modal';
 import { LoggerService, AlertService, ServerService, I18nService, UserService } from '../_services';
@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private ssSub: Subscription;
     private obSub: Subscription;
 
+    public faTriangleExclamation = faTriangleExclamation;
     public faCrown = faCrown;
     public faSync = faSync;
     public faInfo = faInfo;

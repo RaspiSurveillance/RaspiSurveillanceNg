@@ -41,14 +41,6 @@
                             </fa-icon>
                         </span>
                     </div>
-                    <div *ngIf="isAdmin">&nbsp;&nbsp;</div>
-                    <div *ngIf="!loading && isAdmin">
-                        <span *ngIf="deletingServer" class="spinner-border spinner-border-sm"></span>
-                        <span *ngIf="!deletingServer">
-                            <fa-icon [icon]="faTrashAlt" class="delete-link fa-lg" (click)="deleteServer(server.id)">
-                            </fa-icon>
-                        </span>
-                    </div>
                 </div>
             </div>
             <div class="server-details">
@@ -186,6 +178,22 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="list-details list-details-warn" *ngIf="!loading && isAdmin">
+                    <div class="item-header">
+                        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+                        <span>&nbsp;</span>
+                        <span>
+                            {{ i18nService.translate('servers.details.component.dangerArea', 'Danger Area') }}
+                        </span>
+                    </div>
+                    <div class="item-content">
+                        <span *ngIf="deletingServer" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!deletingServer">
+                            <fa-icon [icon]="faTrashAlt" class="delete-link fa-lg" (click)="deleteServer(server.id)">
+                            </fa-icon>
+                        </span>
                     </div>
                 </div>
             </div>
