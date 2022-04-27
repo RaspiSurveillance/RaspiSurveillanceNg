@@ -42,7 +42,9 @@ export const environment = {
         },
         stop: 'stop',
         refresh: 'refresh',
+        reset: 'reset',
         startup: 'startup',
-        shutdown: 'shutdown'
+        shutdown: 'shutdown',
+        shutdownHard: 'shutdown/hard'
     }
 };

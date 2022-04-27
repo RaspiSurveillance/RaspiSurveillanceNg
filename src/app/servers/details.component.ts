@@ -4,7 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { first } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { faTriangleExclamation, faCrown, faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faBackward, faTriangleExclamation, faCrown, faInfo, faCamera, faVideo, faServer, faTrashAlt, faPlusCircle, faEdit, faList, faListOl, faCircle, faPlay, faStop, faPowerOff, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import { ModalConfirm } from '../_modals/confirmation.modal';
 import { LoggerService, AlertService, ServerService, I18nService, UserService } from '../_services';
@@ -16,6 +16,7 @@ import { LoggerService, AlertService, ServerService, I18nService, UserService } 
 export class DetailsComponent implements OnInit, OnDestroy {
     public loading = false;
     public deletingServer = false;
+    public resettingServer = false;
     public shuttingDownServer = false;
     public startingServer = false;
     public server = null;
@@ -28,6 +29,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private ssSub: Subscription;
     private obSub: Subscription;
 
+    public faBackward = faBackward;
     public faTriangleExclamation = faTriangleExclamation;
     public faCrown = faCrown;
     public faSync = faSync;
@@ -129,6 +131,29 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 });
     }
 
+    reset() {
+        this.logger.log('Resetting server');
+
+        this.resettingServer = true;
+        if (this.sSub) {
+            this.sSub.unsubscribe();
+        }
+        this.sSub = this.serverService.resetServer(this.id)
+            .pipe(first())
+            .subscribe({
+                next: (x) => {
+                    this.server = x;
+                    this.loading = false;
+                    this.resettingServer = false;
+                },
+                error: (e) => {
+                    this.logger.error(e);
+                    this.router.navigate(['/']);
+                    this.alertService.error(this.i18nService.translate('servers.details.component.error.server_load', 'Server could not be loaded.'));
+                }
+            });
+    }
+
     observerScreenSize(): void {
         this.obSub = this.observer.observe([
             '(min-width: 280px)',
@@ -227,6 +252,42 @@ export class DetailsComponent implements OnInit, OnDestroy {
         },
             () => {
                 this.logger.log('Canceling server shutdown.');
+                this.shuttingDownServer = false;
+            });
+    }
+
+    shutdownServerHard(id: string) {
+        this.logger.log('Shutdown server (hard).');
+
+        this.shuttingDownServer = true;
+
+        const activeModal = this.modalService.open(ModalConfirm);
+        activeModal.componentInstance.header = this.i18nService.translate('servers.details.component.modal.shutdownHard.header', 'Confirm hard server shutdown');
+        activeModal.componentInstance.text = this.i18nService.translate('servers.details.component.modal.shutdownHard.text', 'Are you sure that you want to hard shut down the server "%sName%"?', { 'sName': this.server.name });
+        activeModal.componentInstance.text2 = this.i18nService.translate('servers.details.component.modal.shutdownHard.text2', 'This server will be shut down hard.');
+        activeModal.componentInstance.textDanger = this.i18nService.translate('servers.details.component.modal.shutdownHard.textDanger', '');
+        activeModal.result.then(() => {
+            this.logger.log('Shutting down server (hard).');
+
+            if (this.sSub) {
+                this.sSub.unsubscribe();
+            }
+            this.sSub = this.serverService.shutdownHard(id)
+                .pipe(first())
+                .subscribe(s => {
+                    this.server = s;
+                    this.logger.log('Server shut down (hard)');
+                    this.alertService.info(this.i18nService.translate('servers.details.component.success.server_shutdown', 'Server "%sName%" shut down.', { 'sName': this.server.name }));
+                    this.shuttingDownServer = false;
+                },
+                    error => {
+                        this.logger.error(error);
+                        this.alertService.error(this.i18nService.translate('servers.details.component.error.server_shutdown', 'Server "%sName%" could not be shut down.', { 'sName': this.server.name }));
+                        this.shuttingDownServer = false;
+                    });
+        },
+            () => {
+                this.logger.log('Canceling server shutdown (hard).');
                 this.shuttingDownServer = false;
             });
     }

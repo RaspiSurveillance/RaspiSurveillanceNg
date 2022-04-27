@@ -87,9 +87,23 @@ export class ServerService {
         return this.http.put(url, {});
     }
 
+    shutdownHard(id: string) {
+        let url = `${environment.apiUrl}/${environment.serversPath.main}/${id}/${environment.serversPath.shutdownHard}`;
+        this.logger.log('Shutting down server (hard), URL: ' + url);
+
+        return this.http.put(url, {});
+    }
+
     refreshServer(id) {
         let url = `${environment.apiUrl}/${environment.serversPath.main}/${id}/${environment.serversPath.refresh}`;
         this.logger.log('Refreshing server, URL: ' + url);
+
+        return this.http.put(url, {});
+    }
+
+    resetServer(id) {
+        let url = `${environment.apiUrl}/${environment.serversPath.main}/${id}/${environment.serversPath.reset}`;
+        this.logger.log('Resetting server, URL: ' + url);
 
         return this.http.put(url, {});
     }

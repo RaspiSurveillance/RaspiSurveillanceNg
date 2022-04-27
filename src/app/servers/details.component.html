@@ -189,11 +189,32 @@
                         </span>
                     </div>
                     <div class="item-content">
-                        <span *ngIf="deletingServer" class="spinner-border spinner-border-sm"></span>
-                        <span *ngIf="!deletingServer">
-                            <fa-icon [icon]="faTrashAlt" class="delete-link fa-lg" (click)="deleteServer(server.id)">
-                            </fa-icon>
-                        </span>
+                        <div *ngIf="!server.isMaster && resettingServer" class="spinner-border spinner-border-sm"></div>
+                        <div *ngIf="!server.isMaster && !resettingServer">
+                            <fa-icon [icon]="faBackward" class="delete-link fa-lg" (click)="reset()"></fa-icon>
+                            <span>&nbsp;</span>
+                            <span>
+                                {{ i18nService.translate('servers.details.component.resetServer', 'Reset Server Status') }}
+                            </span>
+                        </div>
+                        <div *ngIf="!server.isMaster">&nbsp;</div>
+                        <div *ngIf="!server.isMaster && shuttingDownServer" class="spinner-border spinner-border-sm"></div>
+                        <div *ngIf="!server.isMaster && !shuttingDownServer">
+                            <fa-icon [icon]="faPowerOff" class="delete-link fa-lg" (click)="shutdownServerHard(server.id)"></fa-icon>
+                            <span>&nbsp;</span>
+                            <span>
+                                {{ i18nService.translate('servers.details.component.shutdownServerHard', 'Shutdown Server Hard') }}
+                            </span>
+                        </div>
+                        <div *ngIf="!server.isMaster">&nbsp;</div>
+                        <div *ngIf="deletingServer" class="spinner-border spinner-border-sm"></div>
+                        <div *ngIf="!deletingServer">
+                            <fa-icon [icon]="faTrashAlt" class="delete-link fa-lg" (click)="deleteServer(server.id)"></fa-icon>
+                            <span>&nbsp;</span>
+                            <span>
+                                {{ i18nService.translate('servers.details.component.deleteServer', 'Delete Server') }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

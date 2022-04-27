@@ -3,7 +3,7 @@ version: '3.1'
 services:
 
   db:
-    image: calltopower/raspisurveillance-db:1.4.2
+    image: calltopower/raspisurveillance-db:1.4.3
     restart: always
     ports:
       - 3306:3306
@@ -16,7 +16,7 @@ services:
       - ./data/db:/bitnami/mariadb
 
   flyway:
-    image: calltopower/raspisurveillance-flyway:1.4.2
+    image: calltopower/raspisurveillance-flyway:1.4.3
     command: migrate
     volumes:
       - ./flyway/config:/flyway/conf
@@ -24,7 +24,7 @@ services:
       - db
 
   raspisurveillance-server:
-    image: calltopower/raspisurveillance-server:1.4.2
+    image: calltopower/raspisurveillance-server:1.4.3
     restart: always
     ports:
       - 9090:9090
@@ -56,7 +56,7 @@ services:
       - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
 
   raspisurveillance-ng:
-    image: calltopower/raspisurveillance-ng:1.4.2
+    image: calltopower/raspisurveillance-ng:1.4.3
     restart: always
     ports:
       - 80:80
@@ -66,7 +66,7 @@ services:
       - ./data/certificates:/etc/certificates
     environment:
       - API_URL=https://<apiUrl>/api
-      - VERSION=1.4.2
+      - VERSION=1.4.3
       - SIGNUP=DISABLED
       - APPNAME=RaspiSurveillance
       - APPNAME_DE=RaspiÜberwachung
