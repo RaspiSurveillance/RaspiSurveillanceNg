@@ -96,5 +96,8 @@
         }
       }
     }},
-  "defaultProject": "RaspiSurveillanceNg"
+  "defaultProject": "RaspiSurveillanceNg",
+  "cli": {
+    "analytics": false
+  }
 }
